@@ -1,4 +1,12 @@
 /**
+ * Program terbilang menggunakan kotlin.
+ *
+ * Cara penggunaan:
+ * terbilang.terbilang(100L)
+ *
+ * signature:
+ * terbilang.terbilang(angka: Long): String
+ *
  * Created by david on 4/15/17.
  */
 
@@ -8,17 +16,15 @@ object terbilang {
     val suffix: Map<Long, String> = mapOf(10L to "puluh", 100L to "ratus", 1000L to "ribu",
             1000000L to "juta", 1000000000L to "milyar", 1000000000000L to "triliun")
 
-    /*suffix.keys.sortedByDescending { it }.forEach {
-    }*/
     fun terbilang(angka: Long): String {
-        return when {
-            angka in 0L..9L -> satuan[angka.toInt()]
-            angka in 11L..19L -> if (angka == 11L) "sebelas" else satuan[(angka % 10L).toInt()] + " belas"
+        return when(angka) {
+            in 0L..9L -> satuan[angka.toInt()]
+            in 11L..19L -> if (angka == 11L) "sebelas" else satuan[(angka % 10L).toInt()] + " belas"
             else -> {
                 var terbilang = ""
                 for (i in suffix.keys.sortedByDescending { it }) {
                     if (angka >= i) {
-                        terbilang = "${terbilang(angka / i)} ${suffix.get(i)} ${if (angka % i > 0L) terbilang(angka % i) else ""} "
+                        terbilang = "${terbilang(angka / i)} ${suffix[i]} ${if (angka % i > 0L) terbilang(angka % i) else ""} "
                         break
                     }
                 }
