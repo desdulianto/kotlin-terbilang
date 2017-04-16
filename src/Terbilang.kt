@@ -14,7 +14,6 @@ object terbilang {
         return when {
             angka in 0L..9L -> satuan[angka.toInt()]
             angka in 11L..19L -> if (angka == 11L) "sebelas" else satuan[(angka % 10L).toInt()] + " belas"
-            angka == 10L -> "sepuluh"
             else -> {
                 var terbilang = ""
                 for (i in suffix.keys.sortedByDescending { it }) {
@@ -23,6 +22,9 @@ object terbilang {
                         break
                     }
                 }
+                terbilang = terbilang.replace("satu puluh", "sepuluh")
+                                     .replace("satu ratus", "seratus")
+                                     .replace("satu ribu", "seribu")
                 return terbilang.trim()
             }
         }
@@ -46,9 +48,4 @@ fun main(args: Array<String>) {
     jutaan.forEach{ println("$it: ${terbilang.terbilang(it)}")}
     milyar.forEach{ println("$it: ${terbilang.terbilang(it)}")}
     triliun.forEach{ println("$it: ${terbilang.terbilang(it)}")}
-
-    // terbilang(1) --> satu
-    // terbilang(10) --> sepuluh
-    // terbilang(19) --> sembilan belas
-    // terbilang(329) --> tiga ratus dua puluh sembilan
 }
