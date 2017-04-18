@@ -19,7 +19,8 @@ object terbilang {
     fun terbilang(angka: Long): String {
         return when(angka) {
             in 0L..9L -> satuan[angka.toInt()]
-            in 11L..19L -> if (angka == 11L) "sebelas" else satuan[(angka % 10L).toInt()] + " belas"
+            in 11L..19L -> (satuan[(angka % 10L).toInt()] + " belas")
+                            .replace("satu belas", "sebelas")
             else -> {
                 var terbilang = ""
                 for (i in suffix.keys.sortedByDescending { it }) {
