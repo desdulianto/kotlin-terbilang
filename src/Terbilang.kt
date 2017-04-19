@@ -10,7 +10,7 @@
  * Created by david on 4/15/17.
  */
 
-object terbilang {
+object Terbilang {
     val satuan: Array<String> = arrayOf("nol", "satu", "dua", "tiga", "empat",
             "lima", "enam", "tujuh", "delapan", "sembilan")
     val suffix: Map<Long, String> = mapOf(10L to "puluh", 100L to "ratus", 1000L to "ribu",
@@ -41,11 +41,11 @@ fun main(args: Array<String>) {
     val triliun = listOf(1000000000000L, 716005407201000L, 857689000128256L)
 
 
-    n.forEach { println("$it: ${terbilang.terbilang(it)}") }
-    puluhan.forEach{ println("$it: ${terbilang.terbilang(it)}")}
-    ratusan.forEach{ println("$it: ${terbilang.terbilang(it)}")}
-    ribuan.forEach{ println("$it: ${terbilang.terbilang(it)}")}
-    jutaan.forEach{ println("$it: ${terbilang.terbilang(it)}")}
-    milyar.forEach{ println("$it: ${terbilang.terbilang(it)}")}
-    triliun.forEach{ println("$it: ${terbilang.terbilang(it)}")}
+    n.forEach { println("$it: ${Terbilang.terbilang(it)}") }
+    puluhan.forEach{ println("$it: ${Terbilang.terbilang(it)}")}
+    ratusan.forEach{ println("$it: ${Terbilang.terbilang(it)}")}
+    ribuan.forEach{ println("$it: ${Terbilang.terbilang(it)}")}
+    jutaan.forEach{ println("$it: ${Terbilang.terbilang(it)}")}
+    milyar.forEach{ println("$it: ${Terbilang.terbilang(it)}")}
+    triliun.forEach{ println("$it: ${Terbilang.terbilang(it)}")}
 }
