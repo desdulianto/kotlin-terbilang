@@ -23,12 +23,10 @@ object terbilang {
                             .replace("satu belas", "sebelas")
             else -> {
                 var terbilang = ""
-                for (i in suffix.keys.sortedByDescending { it }) {
-                    if (angka >= i) {
-                        terbilang = "${terbilang(angka / i)} ${suffix[i]} ${if (angka % i > 0L) terbilang(angka % i) else ""} "
-                        break
-                    }
-                }
+                val batas: Long? = try {suffix.keys.sortedByDescending {it}.filter {angka >= it}.first()}
+                                   catch (e: NoSuchElementException) { null }
+                if (batas != null)
+                    terbilang = "${terbilang(angka / batas)} ${suffix[batas]} ${if (angka % batas > 0L) terbilang(angka % batas) else ""} "
                 terbilang = terbilang.replace("satu puluh", "sepuluh")
                                      .replace("satu ratus", "seratus")
                                      .replace("satu ribu", "seribu")
