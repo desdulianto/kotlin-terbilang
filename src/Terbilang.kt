@@ -24,9 +24,9 @@ object Terbilang {
             val batas: Long? = try {suffix.keys.sortedByDescending {it}.filter {angka >= it}.first()}
                                catch (e: NoSuchElementException) { null }
             (if (batas != null ) "${terbilang(angka / batas)} ${suffix[batas]} ${if (angka % batas > 0L) terbilang(angka % batas) else ""} "
-                            else "").replace("satu puluh", "sepuluh")
-                                    .replace("satu ratus", "seratus")
-                                    .replace("satu ribu", "seribu").trim()
+                            .replace("satu puluh", "sepuluh")
+                            .replace("satu ratus", "seratus")
+                            .replace("satu ribu", "seribu").trim() else "")
         }
     }
 }
