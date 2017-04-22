@@ -11,17 +11,21 @@
  */
 
 object Terbilang {
-    val satuan: Array<String> = arrayOf("nol", "satu", "dua", "tiga", "empat",
-            "lima", "enam", "tujuh", "delapan", "sembilan")
-    val suffix: Map<Long, String> = mapOf(10L to "puluh", 100L to "ratus", 1000L to "ribu",
-            1000000L to "juta", 1000000000L to "milyar", 1000000000000L to "triliun")
+    val satuan: Array<String> = arrayOf("nol" , "satu", "dua"  , "tiga"   , "empat",
+                                        "lima", "enam", "tujuh", "delapan", "sembilan")
+    val suffix: Map<Long, String> = mapOf(1000000000000L to "triliun",
+                                             1000000000L to "milyar" ,
+                                                1000000L to "juta"   ,
+                                                   1000L to "ribu"   ,
+                                                    100L to "ratus"  ,
+                                                     10L to "puluh")
 
     fun terbilang(angka: Long): String = when(angka) {
         in 0L..9L -> satuan[angka.toInt()]
         in 11L..19L -> (satuan[(angka % 10L).toInt()] + " belas")
                         .replace("satu belas", "sebelas")
         else -> {
-            val batas: Long? = try {suffix.keys.sortedByDescending {it}.filter {angka >= it}.first()}
+            val batas: Long? = try {suffix.keys.filter {angka >= it}.first()}
                                catch (e: NoSuchElementException) { null }
             (if (batas != null ) "${terbilang(angka / batas)} ${suffix[batas]} ${if (angka % batas > 0L) terbilang(angka % batas) else ""} "
                             .replace("satu puluh", "sepuluh")
