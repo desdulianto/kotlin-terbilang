@@ -25,12 +25,13 @@ object Terbilang {
         in 11L..19L -> (satuan[(angka % 10L).toInt()] + " belas")
                         .replace("satu belas", "sebelas")
         else -> {
-            val batas: Long? = try {suffix.keys.filter {angka >= it}.first()}
+            val batas: Long? = try {suffix.keys.first {angka >= it}}
                                catch (e: NoSuchElementException) { null }
-            (if (batas != null ) "${terbilang(angka / batas)} ${suffix[batas]} ${if (angka % batas > 0L) terbilang(angka % batas) else ""} "
-                            .replace("satu puluh", "sepuluh")
-                            .replace("satu ratus", "seratus")
-                            .replace("satu ribu", "seribu").trim() else "")
+            (if (batas != null )
+                "${terbilang(angka / batas)} ${suffix[batas]} ${if (angka % batas > 0L) terbilang(angka % batas) else ""} "
+                .replace("satu puluh", "sepuluh")
+                .replace("satu ratus", "seratus")
+                .replace("satu ribu" , "seribu" ).trim() else "")
         }
     }
 }
