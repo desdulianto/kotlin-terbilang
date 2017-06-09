@@ -7,7 +7,7 @@
  * signature:
  * terbilang.terbilang(angka: Long): String
  *
- * Created by david on 4/15/17.
+ * Created by Des Dulianto <desdulianto@gmail.com> on 4/15/17.
  */
 
 object Terbilang {
@@ -27,11 +27,12 @@ object Terbilang {
         else -> {
             val batas: Long? = try {suffix.keys.first {angka >= it}}
                                catch (e: NoSuchElementException) { null }
-            (if (batas != null )
+            batas?.let {
                 "${terbilang(angka / batas)} ${suffix[batas]} ${if (angka % batas > 0L) terbilang(angka % batas) else ""} "
-                .replace("satu puluh", "sepuluh")
-                .replace("satu ratus", "seratus")
-                .replace("satu ribu" , "seribu" ).trim() else "")
+                    .replace("satu puluh", "sepuluh")
+                    .replace("satu ratus", "seratus")
+                    .replace("satu ribu", "seribu").trim()
+            } ?: ""
         }
     }
 }
