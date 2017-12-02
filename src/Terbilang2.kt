@@ -14,12 +14,15 @@ fun Long.terbilang(): String {
                                                    1000L to "ribu"   ,
                                                     100L to "ratus"  ,
                                                      10L to "puluh"   )
+    val sortedSuffix = suffix.keys.sortedDescending()
+
     return when {
         this < 0L -> "negatif ${Math.abs(this).terbilang()}"
         this.toInt() in 0..9 -> satuan.elementAt(this.toInt())
-        this.toInt() in 11..19 -> "${satuan.elementAt((this % 10L).toInt())} belas".replace("satu", "se")
+        this.toInt() in 11..19 -> "${satuan.elementAt((this % 10L).toInt())} belas"
+                .replace("satu belas", "sebelas")
         else -> {
-            val batas = try { suffix.keys.first { this >= it } } catch (e: NoSuchElementException) { null }
+            val batas = try { sortedSuffix.first { this >= it } } catch (e: NoSuchElementException) { null }
             batas?.let {
                 "${(this / batas).terbilang()} ${suffix[batas]} ${if (this % batas > 0L) (this % batas).terbilang() else "" } "
                         .replace("satu puluh", "sepuluh")

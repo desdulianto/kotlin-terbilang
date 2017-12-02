@@ -19,13 +19,14 @@ object Terbilang {
                                                    1000L to "ribu"   ,
                                                     100L to "ratus"  ,
                                                      10L to "puluh")
+    val sortedSuffix = suffix.keys.sortedDescending()
 
     fun terbilang(angka: Long): String = when(angka) {
         in 0L..9L -> satuan[angka.toInt()]
         in 11L..19L -> (satuan[(angka % 10L).toInt()] + " belas")
                         .replace("satu belas", "sebelas")
         else -> {
-            val batas: Long? = try {suffix.keys.first {angka >= it}}
+            val batas: Long? = try { sortedSuffix.first {angka >= it}}
                                catch (e: NoSuchElementException) { null }
             batas?.let {
                 "${terbilang(angka / batas)} ${suffix[batas]} ${if (angka % batas > 0L) terbilang(angka % batas) else ""} "
